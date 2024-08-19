@@ -1,40 +1,52 @@
-import React from 'react';
 import MapGL, { Marker } from 'react-map-gl/maplibre';
 import 'maplibre-gl/dist/maplibre-gl.css';
+import myData from '../public/data.json';
 
-// Dummy data for countries with coordinates and numbers
-const countriesData = [
-  { country: 'USA', latitude: 37.7749, longitude: -122.4194, number: 10 },
-  { country: 'Canada', latitude: 56.1304, longitude: -106.3468, number: 20 },
-  { country: 'Brazil', latitude: -14.2350, longitude: -51.9253, number: 30 },
-  { country: 'UK', latitude: 51.5074, longitude: -0.1278, number: 40 },
-  // Add more countries as needed
-];
+
+console.log(myData);
+
+// type Case = {
+//   country: string,
+//   countryCode: string,
+//   cases: string,
+//   deaths: string,
+//   location: string
+// }
 
 const MapComponent = () => {
-
 
   return (
     <div className='w-screen h-screen relative'>
       <MapGL
         initialViewState={{
-          longitude: -122.4,
-          latitude: 37.8,
-          zoom: 1
+          longitude: 30,
+          latitude: 30,
+          zoom: 2
         }}
         style={{ width: '100%', height: '100%' }}
         mapStyle='https://api.maptiler.com/maps/streets-v2-light/style.json?key=GVM5THoOUkC8NZ2rlee0'
-        
+
       >
-        {countriesData.map((country, index) => (
-          <Marker key={index} latitude={country.latitude} longitude={country.longitude}>
-            <div
-              className='w-[30px] h-[30px] flex justify-center items-center bg-red-700 bg-opacity-50 border-2 border-red-700 rounded-full'
-            >
-              {country.number}
-            </div>
-          </Marker>
-        ))}
+        {myData.map((country, index) => {
+          const loc = country.location?.split(',');
+          if (!loc) return
+
+          let className = ''
+          if (+country.cases > 1000) className = 'w-[70px] h-[70px] font-semibold text-sm flex justify-center items-center bg-red-700 bg-opacity-50 border-2 border-red-700 rounded-full';
+          if (+country.cases < 1000) className = 'w-[50px] h-[50px] font-semibold text-sm flex justify-center items-center bg-red-500 bg-opacity-50 border-2 border-red-500 rounded-full';
+          if (+country.cases < 500) className = 'w-[30px] h-[30px] font-semibold text-sm flex justify-center items-center bg-orange-400 bg-opacity-50 border-2 border-orange-400 rounded-full';
+          if (+country.cases < 10) className = 'w-[20px] h-[20px] font-semibold text-sm flex justify-center items-center bg-orange-300 bg-opacity-50 border-2 border-orange-300 rounded-full';
+
+          return (
+            <Marker key={index} latitude={+loc[0]} longitude={+loc[1]}>
+              <div
+                className={className}
+              >
+                {country.cases}
+              </div>
+            </Marker>
+          )
+        })}
       </MapGL>
     </div>
   )

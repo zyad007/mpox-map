@@ -1,6 +1,8 @@
-import MapGL, { Marker } from 'react-map-gl/maplibre';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import myData from '../public/data.json';
+import Map from './Map';
+import { useEffect, useState } from 'react';
+import Indicator from './Indicator';
 
 
 console.log(myData);
@@ -14,40 +16,37 @@ console.log(myData);
 // }
 
 const MapComponent = () => {
-
+  const [totalCases, setTotalCases] = useState(0)
+  const [totalDeaths, setTotalDeaths] = useState(0)
+  const [numberOfCountries, setNumberOfCountries] = useState(0)
+  useEffect(() => {
+    let casesSum = 0
+    let deathsSum = 0
+    myData.forEach((country) => {
+      const cases = parseInt(country.cases)
+      const deaths = parseInt(country.deaths)
+      cases && (casesSum += cases)
+      deaths && (deathsSum += deaths)
+    })
+    setTotalCases(casesSum)
+    setTotalDeaths(deathsSum)
+    setNumberOfCountries(myData.length)
+  }, [])
   return (
-    <div className='w-screen h-screen relative'>
-      <MapGL
-        initialViewState={{
-          longitude: 30,
-          latitude: 30,
-          zoom: 2
-        }}
-        style={{ width: '100%', height: '100%' }}
-        mapStyle='https://api.maptiler.com/maps/streets-v2-light/style.json?key=GVM5THoOUkC8NZ2rlee0'
-
-      >
-        {myData.map((country, index) => {
-          const loc = country.location?.split(',');
-          if (!loc) return
-
-          let className = ''
-          if (+country.cases > 1000) className = 'w-[70px] h-[70px] font-semibold text-sm flex justify-center items-center bg-red-700 bg-opacity-50 border-2 border-red-700 rounded-full';
-          if (+country.cases < 1000) className = 'w-[50px] h-[50px] font-semibold text-sm flex justify-center items-center bg-red-500 bg-opacity-50 border-2 border-red-500 rounded-full';
-          if (+country.cases < 500) className = 'w-[30px] h-[30px] font-semibold text-sm flex justify-center items-center bg-orange-400 bg-opacity-50 border-2 border-orange-400 rounded-full';
-          if (+country.cases < 10) className = 'w-[20px] h-[20px] font-semibold text-sm flex justify-center items-center bg-orange-300 bg-opacity-50 border-2 border-orange-300 rounded-full';
-
-          return (
-            <Marker key={index} latitude={+loc[0]} longitude={+loc[1]}>
-              <div
-                className={className}
-              >
-                {country.cases}
-              </div>
-            </Marker>
-          )
-        })}
-      </MapGL>
+    <div className='w-screen h-screen relative overflow-hidden'>
+      <div className='w-full h-[10%] font-bold flex justify-center pt-5 text-3xl bg-[#fafafa]'>MPOX Tracker</div>
+      <div className='w-full h-[90%] flex'>
+        <div className='h-full w-[20%] bg-[#fafafa]'>
+          <Indicator stats={{
+            totalCases,
+            numberOfCountries,
+            totalDeaths
+          }} />
+        </div>
+        <div className='h-full w-[70%] border-2 border-white pr-5 pb-5 bg-[#fafafa]'>
+          <Map />
+        </div>
+      </div>
     </div>
   )
 

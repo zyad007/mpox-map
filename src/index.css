@@ -10,4 +10,10 @@
                 text-xs font-bold z-50
                 transition-all duration-100 scale-0;
     }
+    .tab {
+        @apply rounded-md text-lg p-1 px-4
+    }
+    .selected-tab {
+        @apply bg-white border rounded-md text-lg p-1 px-4
+    }
 }

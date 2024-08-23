@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import Chart from './Chart';
+
 interface Stats {
     totalCases: number
     totalDeaths: number
@@ -12,9 +11,8 @@ const Indicator = ({
 }) => {
 
 
-
     return (
-        <div className="w-full h-full flex flex-col justify-start items-center">
+        <div className="w-full h-full flex flex-col justify-start items-center mt-10">
 
             <div className="flex flex-col justify-center items-start border border-white p-5 w-2/3 rounded-md bg-[#dedede] mr-20">
                 <div className='mb-2 text-lg font-light'>TOTAL CASES</div>

@@ -4,6 +4,8 @@ import Map from './Map';
 import { useEffect, useState } from 'react';
 import Indicator from './Indicator';
 import Tabs from './Tabs';
+import Table from './Table/Table';
+import Tabs2 from './Tabs2';
 
 
 console.log(myData);
@@ -23,6 +25,9 @@ const MapComponent = () => {
   const [years, setYears] = useState<string[]>([])
   const [activeTab, setActiveTab] = useState("0")
   const [yearsData, setYearsData] = useState<any>({})
+
+  const [tabs, setTabs] = useState<'Map' | 'Table'>('Map');
+
   useEffect(() => {
     const years: string[] = []
     Object.keys(myData[0]).forEach((key) => {
@@ -67,10 +72,10 @@ const MapComponent = () => {
     setYearsData(newData)
   }, [years])
   return (
-    <div className='w-screen h-screen relative overflow-hidden'>
-      <div className='w-full h-[10%] font-bold flex justify-center pt-5 text-3xl bg-[#fafafa]'>MPOX Tracker</div>
+    <div className='w-screen h-screen relative overflow-hidden bg-blue-950'>
+      <div className='w-full h-[10%] font-semibold flex justify-center pt-5 text-5xl text-white'>MPOX Tracker</div>
       <div className='w-full h-[90%] flex'>
-        <div className='h-full w-[20%] bg-[#fafafa]'>
+        <div className='h-full w-[20%] flex flex-col justify-center items-center px-5'>
           <Tabs
             years={years}
             activeTab={activeTab}
@@ -93,24 +98,34 @@ const MapComponent = () => {
           }
 
         </div>
-        <div className='h-full w-[70%] border-2 border-white pr-5 pb-5 bg-[#fafafa]'>
-          <Map years={years} activeYear={activeTab} />
+        <div className='h-full w-[70%] px-5 pb-5 border-r border-l border-blue-800'>
+          <div>
+            <Tabs2
+              activeTab={tabs}
+              setActiveTab={setTabs}
+            />
+          </div>
+          {
+            tabs === 'Map' && <Map years={years} activeYear={activeTab} />
+          }
+          {
+            tabs === 'Table' && <Table years={years} activeYear={activeTab} />
+          }
         </div>
         <div>
-
           <div className='w-96 px-4 mb-4 mt-4'>
             <button onClick={() => {
               window.open('https://mpoxvaccine.cdc.gov/')
             }} className='select-none hover:cursor-pointer w-full h-14 bg-blue-600 text-xl text-white rounded-xl hover:bg-opacity-85 transition-all'>Find MPOX Vaccines</button>
           </div>
           <div className='flex w-96 h-14 space-x-4 px-4'>
-            <a href='https://www.paypal.com/donate/?business=2AP6C5WSUQJTU&no_recurring=0&item_name=Help+us+keep+the+MPOX+Tracker+online.&currency_code=USD' className='text-sm flex select-none hover:cursor-pointer justify-center items-center w-full h-14 border-2 border-blue-600 text-blue-600 font-semibold rounded-xl hover:bg-blue-500 hover:text-white transition-all px-4'>
+            <a href='https://www.paypal.com/donate/?business=2AP6C5WSUQJTU&no_recurring=0&item_name=Help+us+keep+the+MPOX+Tracker+online.&currency_code=USD' className='bg-white text-sm flex select-none hover:cursor-pointer justify-center items-center w-full h-14 border-2 border-blue-600 text-blue-600 font-semibold rounded-xl hover:bg-blue-500 hover:text-white transition-all px-4'>
               Donate via PayPal
               <div>
                 <img className='w-12' src='/paypal.png' />
               </div>
             </a>
-            <a href='https://cash.app/$mpoxtracker' className='flex select-none hover:cursor-pointer text-sm justify-center items-center w-full h-14 border-2 border-green-500 text-green-500 font-semibold rounded-xl hover:bg-green-500 hover:text-white transition-all px-4'>Donate via Cash App
+            <a href='https://cash.app/$mpoxtracker' className='bg-green-600 text-white flex select-none hover:cursor-pointer text-sm justify-center items-center w-full h-14 border-2 border-green-500 text-green-500 font-semibold rounded-xl hover:bg-green-500 hover:text-white transition-all px-4'>Donate via Cash App
               <div>
                 <img className='w-20' src='/cash-app.png' />
               </div>

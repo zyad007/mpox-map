@@ -7,7 +7,8 @@
 
 import { useEffect } from "react"
 
-export default function Tabs({ activeTab, setActiveTab, years }: { activeTab: string, setActiveTab: Function, years: string[] }) {
+export default function Tabs2({ activeTab, setActiveTab }: { activeTab: string, setActiveTab: Function }) {
+
   async function changeTab(id: string) {
     setActiveTab(id)
   }
@@ -16,16 +17,12 @@ export default function Tabs({ activeTab, setActiveTab, years }: { activeTab: st
   })
   return (
     <div className="w-full bg-blue-500 text-white flex my-2 justify-around items-center py-2 rounded-md cursor-pointer">
-      {years.map((year) => {
-        return <div id={year} className={activeTab == year?"selected-tab":"tab"} onClick={(e) => {
+      {['Map', 'Table'].map((year) => {
+        return <div id={year} className={ 'select-none w-64 flex justify-center items-center '+(activeTab == year ? "selected-tab" : "tab")} onClick={(e) => {
           const element = e.target as Element
           changeTab(element.id)
         }}>{year}</div>
       })}
-      <div id="0" className={activeTab == "0"?"selected-tab":"tab"} onClick={(e) => {
-        const element = e.target as Element
-        changeTab(element.id)
-      }}>Total</div>
     </div>
   )
 }

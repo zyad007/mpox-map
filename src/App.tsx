@@ -135,7 +135,7 @@ const MapComponent = () => {
 
           <div className='text-white absolute bottom-0 flex flex-col p-2'>
             Contact us:
-            <a className='text-blue-400 hover:text-blue-200' href='http://hello@mpox-tracker.com'>hello@mpox-tracker.com</a>
+            <a className='text-blue-400 hover:text-blue-200' href='mailto:gbr.rdr@proton.me' >gbr.rdr@proton.me</a>
           </div>
         </div>
       </div>

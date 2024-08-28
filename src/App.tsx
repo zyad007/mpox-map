@@ -6,6 +6,7 @@ import Indicator from './Indicator';
 import Tabs from './Tabs';
 import Table from './Table/Table';
 import Tabs2 from './Tabs2';
+import dataTable from '../public/dataTable.json'
 
 
 console.log(myData);
@@ -109,7 +110,7 @@ const MapComponent = () => {
             tabs === 'Map' && <Map years={years} activeYear={activeTab} />
           }
           {
-            tabs === 'Table' && <Table years={years} activeYear={activeTab} />
+            tabs === 'Table' && <Table dataTable={dataTable} />
           }
         </div>
         <div>

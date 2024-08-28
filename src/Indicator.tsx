@@ -27,8 +27,6 @@ const Indicator = ({
                 <div className='font-bold text-3xl'>{stats.numberOfCountries.toLocaleString("en-US")}</div>
             </div>
 
-            
-
         </div>
     );
 }

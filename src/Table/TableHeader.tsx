@@ -1,9 +1,6 @@
-import React, { useEffect } from 'react'
-import SORT from '/sort.png'
-import SORT_UP from '/sort-up.png'
-import SORT_DOWN from '/sort-down.png'
+import { useEffect } from 'react'
 
-export default function TableHeader({ sort, header, sorters }) {
+export default function TableHeader({ header }) {
     useEffect(() => {
         // console.log(sorters)
         // console.log(header)
@@ -19,27 +16,19 @@ export default function TableHeader({ sort, header, sorters }) {
             </div>
             <div className='relative w-[20%] h-full flex justify-center items-center text-center border-r border-slate-500 text-base'>
                 Date
-                <img src={(sorters.Date === 0) ? SORT : (sorters.Date === 1 ? SORT_UP : SORT_DOWN)}
-                    className='absolute w-[1rem] h-[1rem] right-[5%] bottom-[12%]'
-                />
             </div>
-            <div className='relative w-[20%] h-full flex justify-center items-center text-center border-r border-slate-500 text-base'
-                onClick={() => {
-                    sort("cases", "Number")
-                }}>
-                Cases
-                <img src={(sorters.Cases === 0) ? SORT : (sorters.Cases === 1 ? SORT_UP : SORT_DOWN)}
-                    className='absolute w-[1rem] h-[1rem] right-[5%] bottom-[12%]'
-                />
+            <div className='relative w-[20%] h-full flex justify-center items-center text-center border-r border-slate-500 text-base'>
+                New Cases
+
             </div>
-            <div className='relative w-[20%] h-full flex justify-center items-center text-center border-r border-slate-500 text-base'
-                onClick={() => {
-                    sort("deaths", "Number")
-                }}>
-                Deaths
-                <img src={(sorters.Deaths === 0) ? SORT : (sorters.Deaths === 1 ? SORT_UP : SORT_DOWN)}
-                    className='absolute w-[1rem] h-[1rem] right-[5%] bottom-[12%]'
-                />
+            <div className='relative w-[20%] h-full flex justify-center items-center text-center border-r border-slate-500 text-base'>
+                New Deaths
+            </div>
+            <div className='relative w-[20%] h-full flex justify-center items-center text-center border-r border-slate-500 text-base'>
+                Total Cases
+            </div>
+            <div className='relative w-[20%] h-full flex justify-center items-center text-center border-r border-slate-500 text-base'>
+                Total Deaths
             </div>
             
         </div>

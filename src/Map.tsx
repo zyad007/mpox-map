@@ -62,7 +62,7 @@ export default function Map({ activeYear }: props) {
                 const loc = country.location?.split(',');
                 if (!loc) return
                 if(!country[activeYear]) return
-                const cont = ['Africa', 'North America', 'South America', 'Europe']
+                const cont = ['Africa', 'North America', 'South America', 'Europe', 'Asia']
                 if(country.country == "Israel") country.country = "Palestine"
                 if(cont.includes(country.country)) return
                 let className = ''

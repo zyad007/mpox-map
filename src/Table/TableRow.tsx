@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 
 export default function TableRow({ record, i }) {
 
@@ -20,6 +20,12 @@ export default function TableRow({ record, i }) {
             </td>
             <td className='w-[20%] h-full flex justify-center items-center text-center truncate'>
                 {record.date}
+            </td>
+            <td className='w-[20%] h-full flex justify-center items-center text-center truncate'>
+                {record.newCases}
+            </td>
+            <td className='w-[20%] h-full flex justify-center items-center text-center truncate'>
+                {record.newDeaths}
             </td>
             <td className='w-[20%] h-full flex justify-center items-center text-center truncate'>
                 {record.cases}

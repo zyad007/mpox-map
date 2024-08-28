@@ -1,7 +1,6 @@
-import React from 'react'
 import TableRow from './TableRow'
 
-export default function TableBody({ searchedRecords, records, header, setRecords, setSearchedRecords }) {
+export default function TableBody({ searchedRecords }) {
     return (
         <div className='w-full h-[95%]'>
 

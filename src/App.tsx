@@ -113,7 +113,7 @@ const MapComponent = () => {
             tabs === 'Table' && <Table dataTable={dataTable} />
           }
         </div>
-        <div>
+        <div className='relative'>
           <div className='w-96 px-4 mb-4 mt-4'>
             <button onClick={() => {
               window.open('https://mpoxvaccine.cdc.gov/')
@@ -131,6 +131,11 @@ const MapComponent = () => {
                 <img className='w-20' src='/cash-app.png' />
               </div>
             </a>
+          </div>
+
+          <div className='text-white absolute bottom-0 flex flex-col p-2'>
+            Contact us:
+            <a className='text-blue-400 hover:text-blue-200' href='http://hello@mpox-tracker.com'>hello@mpox-tracker.com</a>
           </div>
         </div>
       </div>
